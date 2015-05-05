@@ -52,11 +52,11 @@ Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf
 
 La démonstration de cette propriété se fera en 2 parties:
 \begin{itemize}
-\item Montrer que chaque parcours contiendra un même nombre d'éléments $k+1$, où $k = y/p$.
-\item Montrer que les parcours avec point de départ $a_{i}$,...,$a_{i+(p-1)}$ ne possèdent aucun élément en commun.\newline
+\item Montrer que chaque parcours contiendra un même \textbf{nombre d'éléments} $k+1$, où $k = y/p$.
+\item Montrer que les parcours avec point de départ $a_{i}$,...,$a_{i+(p-1)}$ ne possèdent \textbf{aucun élément en commun}.\newline
 \end{itemize}
 
-Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et pour pas $n$, il faut avoir visiter $k éléments$ avant de retomber sur $a_{i}$. \newline
+Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et pour pas $n$, il faut avoir visiter $k$ éléments avant de retomber sur $a_{i}$. \newline
 
 En effet, si nous visitons les éléments par pas de $n$, il faut que la somme des pas soit égale à un multiple de $y$ pour retomber sur un même élément. On peut résumer cette pensée par la formule:\newline
 $\frac{nk+i}{y} = i$ \newline
@@ -68,6 +68,17 @@ Il n'existe pas de multiple de $y$ divisible par $n$ plus petit que $nk$ car sin
 
 On peut conclure que chaque parcours contient alors $k+1$ éléments. \newline
 
+Nous allons maintenant prouver que chaque éléments sont différents pour les parcours commençant à l'indice $a_{i}$ jusqu'à l'indice $a_{i+(p-1)}$.\newline
+
+Considérons deux parcours $P_{1}$ et $P_{2}$ ayant respectivement comme point de départ $a_{i}$ et $a_{j}$ avec $0 \leq i < j \leq p-1$. Pour que les parcours $P_{1}$ et $P_{2}$ contiennent un élément en commun, il faudrait qu'il existe un élément dans le cadran tel que:\newline
+$\frac{n*t_{1}+i}{y} = \frac{n*t_{2}+j}{y}$ \newline
+$\frac{n(t_{1} - t_{2})}{y} = \frac{j-i}{y}$ \newline
+On a que $(j-i) < p$. De plus comme $i < j$, on peut supposer que $t_{1} > t_{2}$. On peut alors simplifier l'équation par:\newline
+$n(t_{1} - t_{2}) = j - i$\newline
+Si on divise les 2 membres par $p$, on obtient alors:\newline
+$q(t_{1} - t_{2}) = \frac{j-i}{p}$ . Comme $(t_{1}-t_{2}) \geq 1$ et que $(\frac{j-i}{p}) < 1$ alors on peut conclure que cette égalité n'a aucune solution et que donc il n'y a pas d'éléments en commun pour les parcours cités plus haut.
+
+On vient de démontrer que la propriété énoncée est vraie.
 
 
 \section{Convention de représentation}
