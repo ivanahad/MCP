@@ -1,0 +1,77 @@
+\documentclass[a4paper, 12pt]{report}
+
+\usepackage[french]{babel} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\author{David \bsc{Haven} \and Eddy \bsc{Ndizera} \and Ivan \bsc{Ahad} \and Julien \bsc{Sterbelle}}
+
+\title{Rapport Projet MCP}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+
+Dans le cadre du cours Méthode de Conception de Programmes, il nous a été demandé de construire un algorithme \textit{correct} qui prend en entrée un \textbf{cadran $C_{1}$} et un \textbf{entier naturel $n$} et qui génère le cadran résultant de la rotation de longueur $n$ de $C_{1}$ . \newline
+
+L'algorithme doit répondre à certaines contraintes qui sont:
+\begin{itemize}
+\item il doit être le plus général possible;
+\item il doit être le plus simple possible;
+\item il ne doit pas utiliser d'Api Java;
+\item la mémoire utilisée doit être fixe;
+\item il doit avoir une complexité algorithmique temporelle en $O(n)$ où $n$ représente la taille du cadran. \newline
+\end{itemize}
+
+Ce présent rapport a donc pour but de vous présenter notre solution au problème et de vous prouvez que notre algorithme est \textbf{correct} et qu'il répond aux \textbf{contraintes} citées plus haut. Pour ce faire, la méthode utilisée est celle vue en cours qu'on peut découper en plusieurs parties:
+%Expliquer différentes parties ?
+\begin{itemize}
+\item Théorie du problème
+\item Convention de représentation
+\item Spécifications des méthodes
+\item Code Java
+\item Correction totale de l'algorithme: triplet de Hoare-Manna et variant \newline
+\end{itemize}
+
+\section{Théorie du problème}
+
+Soit $C$ un cadran de longueur $y$ (disposant de y éléments). Nous voulons effectuer une rotation de  longueur $n$ sur ce cadran. Une première propriété utile à la résolution de ce problème est la théorie des \textbf{modulos}. \newline
+%Source wikipedia
+%Expliquer les modulo
+
+La deuxième théorie est la suivante:\newline
+Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. \newline
+
+Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tout les éléments du cadran une fois sauf les éléments de départ qui seront visités au début et à la fin du parcours.\newline
+
+La démonstration de cette propriété se fera en 2 parties:
+\begin{itemize}
+\item Montrer que chaque parcours contiendra un même nombre d'éléments $k+1$, où $k = y/p$.
+\item Montrer que les parcours avec point de départ $a_{i}$,...,$a_{i+(p-1)}$ ne possèdent aucun élément en commun.\newline
+\end{itemize}
+
+Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et pour pas $n$, il faut avoir visiter $k éléments$ avant de retomber sur $a_{i}$. \newline
+
+En effet, si nous visitons les éléments par pas de $n$, il faut que la somme des pas soit égale à un multiple de $y$ pour retomber sur un même élément. On peut résumer cette pensée par la formule:\newline
+$\frac{nk+i}{y} = i$ \newline
+$nk$ est bien un multiple de $y$ puisque $k = y/p$.\newline
+
+Il reste à prouver que $nk$ est bien le plus petit multiple de $y$ divisible par $n$. On a que:\newline
+$nk = \frac{n*y}{p} = q*y$ où $n=q*p$.\newline
+Il n'existe pas de multiple de $y$ divisible par $n$ plus petit que $nk$ car sinon $p$ ne serait pas le plus grand commun diviseur de $y$ et $n$.\newline
+
+On peut conclure que chaque parcours contient alors $k+1$ éléments. \newline
+
+
+
+\section{Convention de représentation}
+
+
+
+\end{document}
