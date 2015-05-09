@@ -51,7 +51,7 @@ i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux enti
 La deuxième théorie est la suivante:\newline
 Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. \newline
 
-Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tout les éléments du cadran une fois sauf les éléments de départ qui seront visités au début et à la fin du parcours.\newline
+Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tout les éléments du cadran une fois sauf les éléments de départ qui seront visités au début et à la fin d'un parcours.\newline
 
 La démonstration de cette propriété se fera en 2 parties:
 \begin{itemize}
@@ -59,29 +59,29 @@ La démonstration de cette propriété se fera en 2 parties:
 \item Montrer que les parcours avec point de départ $a_{i}$,...,$a_{i+(p-1)}$ ne possèdent \textbf{aucun élément en commun}.\newline
 \end{itemize}
 
-Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et pour pas $n$, il faut avoir visiter $k$ éléments avant de retomber sur $a_{i}$. \newline
+Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et pour pas $n$, il faut avoir effectuer $k$ nombre de pas de n avant de retomber sur $a_{i}$. \newline
 
-En effet, si nous visitons les éléments par pas de $n$, il faut que la somme des pas soit égale à un multiple de $y$ pour retomber sur un même élément. On peut résumer cette pensée par la formule:\newline
-$\frac{nk+i}{y} = i$ \newline
-$nk$ est bien un multiple de $y$ puisque $k = y/p$.\newline
+En effet, si nous visitons les éléments par pas de $n$, il faut que la somme des pas soit égale à un multiple de $y$ pour retomber sur un même élément (on peut démontrer cela gràce aux modulos, pour que 2 nombres modulo n soit égaux il faut que leur différence soit un multiple de n). Or $n*k$ est bien un multiple de y puisque $k = y/p$ et que $p$ divise $n$. On peut résumer cela par la formule:\newline
+$(n*k+i)$ mod $y = i$ \newline
 
-Il reste à prouver que $nk$ est bien le plus petit multiple de $y$ divisible par $n$. On a que:\newline
-$nk = \frac{n*y}{p} = q*y$ où $n=q*p$.\newline
-Il n'existe pas de multiple de $y$ divisible par $n$ plus petit que $nk$ car sinon $p$ ne serait pas le plus grand commun diviseur de $y$ et $n$.\newline
+Il reste à prouver que $n*k$ est bien le plus petit multiple de $y$ divisible par $n$. On a que:\newline
+$nk = \frac{n*y}{p} = q*y$ (où $n=q*p$).\newline
+Il n'existe pas de multiple de $y$ divisible par $n$ plus petit que $n*k$ car sinon $p$ ne serait pas le plus grand commun diviseur de $y$ et $n$.\newline
 
 On peut conclure que chaque parcours contient alors $k+1$ éléments. \newline
 
-Nous allons maintenant prouver que chaque éléments sont différents pour les parcours commençant à l'indice $a_{i}$ jusqu'à l'indice $a_{i+(p-1)}$.\newline
+Nous allons maintenant prouver que chaque éléments sont différents pour les parcours commençant à l'indice $a_{i}$ jusqu'aux parcours commençant à l'indice $a_{i+(p-1)}$.\newline
 
 Considérons deux parcours $P_{1}$ et $P_{2}$ ayant respectivement comme point de départ $a_{i}$ et $a_{j}$ avec $0 \leq i < j \leq p-1$. Pour que les parcours $P_{1}$ et $P_{2}$ contiennent un élément en commun, il faudrait qu'il existe un élément dans le cadran tel que:\newline
-$\frac{n*t_{1}+i}{y} = \frac{n*t_{2}+j}{y}$ \newline
-$\frac{n(t_{1} - t_{2})}{y} = \frac{j-i}{y}$ \newline
-On a que $(j-i) < p$. De plus comme $i < j$, on peut supposer que $t_{1} > t_{2}$. On peut alors simplifier l'équation par:\newline
-$n(t_{1} - t_{2}) = j - i$\newline
-Si on divise les 2 membres par $p$, on obtient alors:\newline
-$q(t_{1} - t_{2}) = \frac{j-i}{p}$ . Comme $(t_{1}-t_{2}) \geq 1$ et que $(\frac{j-i}{p}) < 1$ alors on peut conclure que cette égalité n'a aucune solution et que donc il n'y a pas d'éléments en commun pour les parcours cités plus haut.
+$(n*t_{1})+i$ mod $y = (n*t_{2})+j$ mod $y$  (où $t_{1}$ et $t_{2}$ sont des entiers naturels)\newline
+$\Leftrightarrow (n(t_{1} - t_{2})$ mod $y = j-i$ mod $y$ \newline
 
-On vient de démontrer que la propriété énoncée est vraie.
+Si on divise les 2 membres par $p$, on obtient alors:\newline
+$q(t_{1} - t_{2}) = \frac{j-i}{p}$  (où $n=q*p$).\newline
+
+On a que $(j-i) < p$. De plus comme $i < j$, on peut supposer que $t_{1} > t_{2}$. Comme $(t_{1}-t_{2}) \geq 1$ et que $(\frac{j-i}{p}) < 1$ alors on peut conclure que cette égalité n'a aucune solution et que donc il n'y a pas d'éléments en commun pour les parcours cités plus haut.\newline
+
+On vient de démontrer que la propriété énoncée est vraie. Comme chaque parcours contient $k = y/p$ éléments différents et qu'on effectue $p$ parcours de cette sorte en changeant d'indice de départ, on a bien qu'on visite $k*p = (y*p)/p = y $ éléments différents. Donc on aura visité tout les éléments du cadran.
 
 
 \section{Convention de représentation}
