@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc} 
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{listings}  
 
 \author{David \bsc{Haven} \and Eddy \bsc{Ndizera} \and Ivan \bsc{Ahad} \and Julien \bsc{Sterbelle}}
 
@@ -87,6 +88,49 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
 %Ajouter schéma pour illustrer cela
 
 \section{Convention de représentation}
+
+\section{Spécifications des méthodes}
+
+\section{Code Java}
+
+\lstset{language=Java}
+
+\begin{lstlisting}[frame=single]
+
+public static void rotation(int[] cadran, int rotation){
+	int n = cadran.length;  
+	//nombre de decalements restant a effectuer
+	int depart = 0;		
+	//indice de depart pour premier parcours
+		
+	while(n!=0){
+		n = parcours(cadran, depart, rotation, n);
+		depart++; // on change d'indice de depart
+	}
+}
+
+public static int parcours(int[] cadran, 
+			int depart, int pas, int n){
+	int i = depart + pas;	
+	int temp = 0;	
+	int deplacer = cadran[i%cadran.length]; 
+		
+	cadran[i%cadran.length] = 
+			cadran[depart%cadran.length];
+	n--;
+		
+	while((i % cadran.length) != depart){
+		temp = cadran[(i+pas)%cadran.length];
+		cadran[(i+pas)%cadran.length] = 
+					deplacer;
+		deplacer = temp;
+		i = i + pas;
+		n--;
+	}
+	return n;
+}
+
+\end{lstlisting} 
 
 
 
