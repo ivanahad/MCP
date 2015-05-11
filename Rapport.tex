@@ -172,7 +172,7 @@ Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le 
 \end{figure}
 
 
-\item INV 2 : La variable "depart" contient l'indice auquel nous avons démarré le parcours courant du cadran, et 0 $\le$ depart < cadran.length
+\item INV 2 : La variable "depart" contient l'indice auquel nous allons démarré le parcours du cadran, et 0 $\le$ depart < cadran.length
 
 \item INV 3 : La variable "memoire" contient l'élément que nous devons déplacer à l'itération courante i.
 
@@ -272,6 +272,7 @@ else\\
 \\
 \\
 \item après exécution de Partie 2 : 
+
 \{rotation=$r_{1}$ $\wedge$  tmp=$e_{index1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{index1-1}$, $m_{1}$, $e_{index1+1}$, ...,  $e_{cadran.length-1}$ ] $\wedge$ depart=$d_{2}$ $\wedge$ memoire=$e_{index1}$ $\wedge$ index=$index_{2}$ $\wedge$ i=$i_{1}$+1 \} t.q. (\textbf{Cond1} $\dot{\wedge}$ $\neg$ $index_{1}$=$d_{1}$)\\
 \end{itemize}
 
@@ -312,11 +313,9 @@ Nous respectons donc bien \textbf{Post}.
 
 \newpage
 \section{Preuve du variant}
-Notre invariant est \textbf{y-i}
 Nous allons utiliser l'invariant pour prouver le variant. Il s'agit de prouver deux propriétés pour montrer que celui-ci décroît effectivement : 
+
 \begin{enumerate}
-
-
 \item Vérifier que par l'invariant, à chaque itération, le variant est supérieur ou égal à 0 : \textbf{INV => 0 $\le$ f(E) }
 \item Vérifier que pour toute itération i, l'environnement \textbf{f($E_{i}$)} est supérieur à l'environnement f($E_{i+1}$) où \textbf{i} représente l'itération courante, c'est à dire que le variant décroît à chaque itération. : \textbf{ INV => f($E_{i+1}$) $\le$ f($E_{i}$)}
 \end{enumerate}
@@ -329,7 +328,7 @@ Par la première partie de l'invariant, nous savons que 0 $\le$i $\le$ |BP| $\le
 
 \textit{INV => i $\le$ y => -y $\le$ -i => y - y $\le$ y - i => 0 $\le$ y - i}. \\
 
-Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la fin de la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
+Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la fin de la ième itération, il est simple de déterminer que i est au maximum égal à y. Ainsi, la différence entre y et i ne peut être négative. 
 
 \subsection{Prouver que le variant à la ième itération est supérieur qu'à la ième+1 itération}
 Dans le if (Partie1) et le else(Partie2) de notre algorithme, le i est à chaque fois incrémenté après avoir effectué les instructions. A chaque itération, i est donc incrémenté. Dès lors, on peut voir que \textbf{y-i} décroit à chaque itération.
@@ -339,5 +338,5 @@ Ainsi : \\
 
 
 \section{Conclusion}
-Ce rapport montre donc une correction totale de notre algorithme permettant de d'effectuer une rotation sur un cadran. Ainsi, nous avons prouvé qu'il est correct tout en respectant les contraintes de complexité temporelle. De plus, il ne croît pas en espace, et nous pensons que notre algorithme est le plus général possible.
+Ce rapport montre donc une correction totale de notre algorithme permettant d'effectuer une rotation sur un cadran. Ainsi, nous avons prouvé qu'il est correct tout en respectant les contraintes de complexité temporelle. De plus, il ne croît pas en taille mémoire, et nous pensons que notre algorithme est général.
 \end{document}
