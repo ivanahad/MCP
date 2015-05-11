@@ -200,6 +200,8 @@ H : i = |E| (où |E| = cadran.length comme spécifié plus haut)
 
 \vspace{0.2cm}
 
+\subsubsection*{\{Pre\} INIT \{INV\}}
+
 \textbf{Ex. Symoblique de INIT lorsque\{PRE\}} :
 
 \begin{itemize}
@@ -226,7 +228,7 @@ i:=0\\
 \item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{1}$ $\wedge$ i=0\} t.q. (0$\le$ $r_{1}$ $\le$ cadran.length)\\
 \end{itemize}
 
-\textbf{\{Pre\} INIT \{INV\}}
+\textbf{Explications}
 
 \begin{enumerate}
 
@@ -245,6 +247,8 @@ i:=0\\
 
 Nous retrouvons donc bien l'invariant à la fin de l'initialisation (en partant des préconditions). \\
 
+
+\subsubsection*{\{INV $\dot{\wedge}$ !H\} ITER \{INV\}}
 
 \textbf{Ex. symbolique de ITER lorsque {INV $\dot{\wedge}$ $\neg$ H}}\\
 
@@ -270,13 +274,10 @@ else\\
 \\
 \item après exécution de Partie 2 : 
 \{rotation=$r_{1}$ $\wedge$  tmp=$e_{index1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{index1-1}$, $m_{1}$, $e_{index1+1}$, ...,  $e_{cadran.length-1}$ ] $\wedge$ depart=$d_{2}$ $\wedge$ memoire=$e_{index1}$ $\wedge$ index=$index_{2}$ $\wedge$ i=$i_{1}$+1 \} t.q. (\textbf{Cond1} $\dot{\wedge}$ $\neg$ $index_{1}$=$d_{1}$)\\
-
-
-
-
 \end{itemize}
 
-\textbf{\{INV $\dot{\wedge}$ !H\} ITER \{INV\}}
+\textbf{Explications} \\
+
 Deux cas possibles :\\
 \begin{enumerate}
 \item Soit index == depart (cela signifie que nous avons réalisé un parcours mais que, par !H, le travail n'est pas fini ; cela arrivera pgcd(rotation, |cadran|) fois, cfr. théorie du problème)
@@ -299,7 +300,7 @@ Deux cas possibles :\\
 \end{enumerate}
 \end{enumerate}
 
-\textbf{\{INV $\dot{\wedge}$ H\} CLOT \{Post\}}\\
+\subsubsection*{\{INV $\dot{\wedge}$ H\} CLOT \{Post\}}
 
 \{rotation=$r_{1}$ $\wedge$ cadran=[$e'_{0}$,..., $e'_{cadran.length-1}$ ] $\wedge$ depart=$d_{final}$ $\wedge$ memoire=$m_{final}$ $\wedge$ index=$index_{final}$ $\wedge$ \textbf{i=cadran.length}\}\\
 
