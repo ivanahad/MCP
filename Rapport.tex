@@ -9,6 +9,9 @@
 \usepackage{graphicx}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{amsmath,amsfonts,amssymb}
+\lstset{
+language=Java,
+}
 
 
 \author{David \bsc{Haven} \and Eddy \bsc{Ndizera} \and Ivan \bsc{Ahad} \and Julien \bsc{Sterbelle}}
@@ -96,7 +99,7 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
 \newpage
 \section{Code Java}
 
-\lstset{language=Java}
+
 
 \begin{lstlisting}[frame=single]
 
@@ -143,7 +146,7 @@ public static void rotation(int[] cadran, int rotation){
 
 \begin{enumerate}
 \item INV 1 : Il y a (au moins) i éléments correctement placés dans le cadran et il y a au maximum |cadran| éléments bien placés dans le cadran.
-Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le sous ensemble des éléments bien placés de E, alors 0 $\le$i $\le$ |BP| $\le$ |E|. (Rem. : |A| = la taille de l'ensemble A).\\
+Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le sous ensemble des éléments bien placés de E, alors 0 $\le$i $\le$ |BP| $\le$ |E|. (\textbf{Rem. : |A| = la taille de l'ensemble A}).\\
 
 \begin{figure}[h]
    \includegraphics[scale=0.5]{Ensembles}
@@ -166,12 +169,8 @@ Ainsi, l'invariant est la conjonction : $INV 1 \wedge INV 2 \wedge INV 3 \wedge 
 H : i = |E|
 
 \subsubsection{Triplet de Hoare-Manna}
-\vspace{0.2cm}
 
-\textbf{\{Pre\} INIT \{INV\}}
-\vspace{0.2cm}
-
-\textbf{Pre} :
+\textbf{PRE} :
 \begin{enumerate}
  \item rotation = le nombre de rotation que l'on souhaite faire. 
  \item cadran un tableau non vide représentant l'état du cadran.
@@ -179,7 +178,33 @@ H : i = |E|
 
 \vspace{0.2cm}
 
-\textbf{INIT} :
+\textbf{Ex. Symoblique de INIT lorsque\{PRE\}} :
+
+\begin{itemize}
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ]\} t.q. (0$\le$ $r_{0}$)\\
+
+rotation=rotation\%cadran.length\\
+
+\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ]\} t.q. (0$\le$ $r_{1}$ $\le$ cadran.length)\\ 
+
+depart:=0\\
+
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+
+memoire:=cadran[depart]\\
+
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ $e_{0}$ \} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+
+index:=rotation
+
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ $e_{0}$ $\wedge$ index=$r_{0}$\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+
+i:=0\\
+
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ $e_{0}$ $\wedge$ index=$r_{0}$ $\wedge$ i=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\end{itemize}
+
+\textbf{\{Pre\} INIT \{INV\}}
 
 \begin{enumerate}
 
@@ -193,9 +218,11 @@ H : i = |E|
         
 \item int i = 0 => Respecte bien INV 1 : il y a 0 élément correctement placé.
 \end{enumerate}
-\vspace{0.3cm}
 
-Nous retrouvons donc bien l'invarient à la fin de l'initialisation (en partant des préconditions). \\
+Nous retrouvons donc bien l'invariant à la fin de l'initialisation (en partant des préconditions). \\
+
+
+\textbf{Ex. symbolique de ITER lorsque {INV $\dot{\wedge}$ $\neg$ H}}\\
 
 \textbf{\{INV \&\& !H\} ITER \{INV\}}
 
@@ -237,7 +264,7 @@ Nous allons utiliser l'invariant pour prouver le variant. Il s'agit de prouver d
 \item Vérifier que pour toute itération i, l'environnement \textbf{f($E_{i}$)} est supérieur à l'environnement f($E_{i+1}$) où \textbf{i} représente l'itération courante, c'est à dire que le variant décroît à chaque itération. : \textbf{ INV => f($E_{i+1}$) $\le$ f($E_{i}$)}
 \end{enumerate}
 
-Pour cette preuve, nous allons poser que \textbf{y} est égal à la longueur du cadran, et \textbf{i} représente le nombre d'éléments correctement placés dans le cadran.\\
+Pour cette preuve, nous allons poser que \textbf{y} est égal à la longueur du cadran(donc \textbf{|E|}), et \textbf{i} représente le nombre d'éléments correctement placés dans le cadran.\\
 
 Ainsi, notre variant est \textbf{y-i}.
 \subsection{Prouver que le variant est supérieur ou égal à 0}
