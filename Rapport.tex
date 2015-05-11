@@ -8,6 +8,8 @@
 \usepackage{listings}  
 \usepackage{graphicx}
 \usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amsfonts,amssymb}
+
 
 \author{David \bsc{Haven} \and Eddy \bsc{Ndizera} \and Ivan \bsc{Ahad} \and Julien \bsc{Sterbelle}}
 
@@ -99,37 +101,37 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
 \begin{lstlisting}[frame=single]
 
 public static void rotation(int[] cadran, int rotation){
-	int n = cadran.length;  
-	//nombre de decalements restant a effectuer
-	int depart = 0;		
-	//indice de depart pour premier parcours
-		
-	while(n!=0){
-		n = parcours(cadran, depart, rotation, n);
-		depart++; // on change d'indice de depart
-	}
-}
+        rotation = rotation%cadran.length;
+        
+        int depart = 0; // L'indice duquel on part (utile si l'on doit a un moment se decaler)
+        int memoire = cadran[depart]; // Memorise le nombre a deplacer
+        int index = rotation; // L'indice auquel on va mettre memoire
+        
+        int i = 0;
+        while (i != cadran.length){
+            
+            if (index == depart){ // On revient au point de depart => il va falloir se decaler
+                
+                cadran[index] = memoire; // On fait le dernier changement
 
-public static int parcours(int[] cadran, 
-			int depart, int pas, int n){
-	int i = depart + pas;	
-	int temp = 0;	
-	int deplacer = cadran[i%cadran.length]; 
-		
-	cadran[i%cadran.length] = 
-			cadran[depart%cadran.length];
-	n--;
-		
-	while((i % cadran.length) != depart){
-		temp = cadran[(i+pas)%cadran.length];
-		cadran[(i+pas)%cadran.length] = 
-					deplacer;
-		deplacer = temp;
-		i = i + pas;
-		n--;
+                depart = (depart+1)%cadran.length; // On decale l'indice de depart de une place
+                memoire = cadran[depart]; // On memorise ce qui se trouve a l'indice de depart
+                index = (depart + rotation)%cadran.length; // L'indice de l'element auquel on doit mettre memoire
+                
+                i++;
+            }
+            else{
+                
+                // On met dans cadran[index] ce qui se trouvait en memeoire et on met en memoire ce qui se trouvait a cadran[index]
+                int tmp = cadran[index];
+                cadran[index] = memoire;
+                memoire = tmp;
+                
+                index = (index + rotation)%cadran.length; // On deplace index du nombre de rotations
+                i++;
+            }
+        }
 	}
-	return n;
-}
 
 \end{lstlisting} 
 
@@ -154,6 +156,8 @@ Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le 
 
 \item INV 4 : La variable "index" contient l'indice auquel nous devons déplacer l'élément contenu dans "mémoire".
 \end{enumerate}
+
+Ainsi, l'invariant est la conjonction : $INV 1 \wedge INV 2 \wedge INV 3 \wedge INV 4$
 
 
 
@@ -222,7 +226,32 @@ CLOT est vide, car nous avons modifié le tableau tout au long des itérations.
 La seule partie de l'invariant utile ici est INV 1 qui nous dit que 0 $\le$ i $\le$ |BP| $\le$ |E|. De plus, H nous dit que i = |E|. Nécessairement, donc, |BP| = |E|, ce qui signifie qu'il y a autant d'éléments dans BP que dans E. Autrement dit, tous les éléments de E sont bien placés.
 Nous respectons donc bien \textbf{Post}.
 
+\newpage
 \section{Preuve du variant}
+Notre invariant est \textbf{y-i}
+Nous allons utiliser l'invariant pour prouver le variant. Il s'agit de prouver deux propriétés pour montrer que celui-ci décroît effectivement : 
+\begin{enumerate}
+
+
+\item Vérifier que par l'invariant, à chaque itération, le variant est supérieur ou égal à 0 : \textbf{INV => 0 $\le$ f(E) }
+\item Vérifier que pour toute itération i, l'environnement \textbf{f($E_{i}$)} est supérieur à l'environnement f($E_{i+1}$) où \textbf{i} représente l'itération courante, c'est à dire que le variant décroît à chaque itération. : \textbf{ INV => f($E_{i+1}$) $\le$ f($E_{i}$)}
+\end{enumerate}
+
+Pour cette preuve, nous allons poser que \textbf{y} est égal à la longueur du cadran, et \textbf{i} représente le nombre d'éléments correctement placés dans le cadran.\\
+
+Ainsi, notre variant est \textbf{y-i}.
+\subsection{Prouver que le variant est supérieur ou égal à 0}
+Par la première partie de l'invariant, nous savons que 0 $\le$i $\le$ |BP| $\le$ |E|, où y=|E|. Nous allons transformer l'expression \textbf{i $\le$ y} pour montrer que y-i est effectivement supérieur ou égal à 0 : \\
+
+\textit{INV => i $\le$ y => -y $\le$ -i => y-y $\le$ y-i => 0 $\le$ y-i}. \\
+
+Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
+
+\subsection{Prouver que le variant à ième itération est supérieur qu'à la ième+1 itération}
+
+
+
+
 
 
 \end{document}
