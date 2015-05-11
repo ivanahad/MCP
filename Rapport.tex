@@ -50,7 +50,7 @@ Ce présent rapport a donc pour but de vous présenter notre solution au problè
 
 Soit $C$ un cadran de longueur $y$ (disposant de y éléments). Nous voulons effectuer une rotation de  longueur $n$ sur ce cadran. Une première propriété utile à la résolution de ce problème est la théorie des \textbf{modulos}. \newline
 
-La théorie des modulos nous permet de dire, si on compte les éléments du cadran à partir de l'indice 0, de dire que l'élément 0 est le même que le yème élément pour le cadran C. L'élément 1 est égal au (y+1)éme élément du cadran C, etc. On peut le traduire sous cette écriture:\newline
+La théorie des modulos nous permet de dire, si on compte les éléments du cadran à partir de l'indice 0, de dire que l'élément 0 est le même que le yème élément pour le cadran C. L'élément 1 est égal au (y+1)éme élément du cadran C, etc (voir Fig.1). On peut le traduire sous cette écriture:\newline
 i mod y = y+i mod y ou de façon plus générale \newline
 i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux entiers naturels). \newline
 
@@ -60,7 +60,7 @@ i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux enti
 \end{figure}
 
 La deuxième théorie est la suivante:\newline
-Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. \newline
+Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. Par exemple, sur la Fig.1, un parcours par pas de 3 en commençant par l'élément 0 donnera la suite: <15, 12, 54,15>.\newline
 
 Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tout les éléments du cadran une fois sauf les éléments de départ qui seront visités au début et à la fin d'un parcours.\newline
 
@@ -81,7 +81,7 @@ Il n'existe pas de multiple de $y$ divisible par $n$ plus petit que $n*k$ car si
 
 On peut conclure que chaque parcours contient alors $k+1$ éléments. \newline
 
-Nous allons maintenant prouver que chaque éléments sont différents pour les parcours commençant à l'indice $a_{i}$ jusqu'aux parcours commençant à l'indice $a_{i+(p-1)}$.\newline
+Nous allons maintenant prouver que les éléments sont différents pour les parcours commençant à l'indice $a_{i}$ jusqu'aux parcours commençant à l'indice $a_{i+(p-1)}$.\newline
 
 Considérons deux parcours $P_{1}$ et $P_{2}$ ayant respectivement comme point de départ $a_{i}$ et $a_{j}$ avec $0 \leq i < j \leq p-1$. Pour que les parcours $P_{1}$ et $P_{2}$ contiennent un élément en commun, il faudrait qu'il existe un élément dans le cadran tel que:\newline
 $(n*t_{1})+i$ mod $y = (n*t_{2})+j$ mod $y$  (où $t_{1}$ et $t_{2}$ sont des entiers naturels)\newline
@@ -94,7 +94,7 @@ On a que $(j-i) < p$. De plus comme $i < j$, on peut supposer que $t_{1} > t_{2}
 
 On vient de démontrer que la propriété énoncée est vraie. Comme chaque parcours contient $k = y/p$ éléments différents et qu'on effectue $p$ parcours de cette sorte en changeant d'indice de départ, on a bien qu'on visite $k*p = (y*p)/p = y $ éléments différents. Donc on aura visité tout les éléments du cadran. \newline
 
-A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tout les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent.
+A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tout les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent. Par exemple, si on considère le parcours par pas de 6  en commençant de l'élément 0 sur la Fig.1, on obtient la suite:< 15, 54, 12, 15>. Il suffit alors en effectuant le parcours de modifier 54 par 15, 12 par 54, etc.
 %Ajouter schéma pour illustrer cela
 
 \section{Convention de représentation}
