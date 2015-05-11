@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt]{report}
+\documentclass[a4paper, 12pt]{article}
 
 \usepackage[french]{babel} 
 \usepackage[utf8]{inputenc}
@@ -7,7 +7,7 @@
 \usepackage{amssymb}
 \usepackage{listings}  
 \usepackage{graphicx}
-
+\usepackage[margin=2.5cm]{geometry}
 
 \author{David \bsc{Haven} \and Eddy \bsc{Ndizera} \and Ivan \bsc{Ahad} \and Julien \bsc{Sterbelle}}
 
@@ -18,8 +18,7 @@
 \begin{document}
 
 \maketitle
-
-\section*{Introduction}
+\section{Introduction}
 
 Dans le cadre du cours Méthode de Conception de Programmes, il nous a été demandé de construire un algorithme \textit{correct} qui prend en entrée un \textbf{cadran $C_{1}$} et un \textbf{entier naturel $n$} et qui génère le cadran résultant de la rotation de longueur $n$ de $C_{1}$ . \newline
 
@@ -145,7 +144,7 @@ public static int parcours(int[] cadran,
 Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le sous ensemble des éléments bien placés de E, alors 0 $\le$i $\le$ |BP| $\le$ |E|. (Rem. : |A| = la taille de l'ensemble A).\\
 
 \begin{figure}[h]
-   \includegraphics[scale=0.4]{Ensembles}
+   \includegraphics[scale=0.5]{Ensembles}
 \end{figure}
 
 
@@ -194,9 +193,9 @@ H : i = |E|
 
 Nous retrouvons donc bien l'invarient à la fin de l'initialisation (en partant des préconditions). \\
 
-\textbf{\{INV && !H\} ITER \{INV\}}
+\textbf{\{INV \&\& !H\} ITER \{INV\}}
 
-Deux cas possibles :
+Deux cas possibles :\\
 \begin{enumerate}
 \item Soit index == depart (cela signifie que nous avons réalisé un tour mais que, par !H, le travail n'est pas fini ; cela arrivera pgcd(rotation, |cadran|) fois, cfr. théorie du problème)
 \begin{enumerate}
@@ -207,21 +206,21 @@ Deux cas possibles :
 \item index = depart + rotation : nous respectons bien INV 4 en ce sens que l'indice auquel nous devons placer memoire est bien l'indice de départ du tour augmenté du nombre de rotations à effectuer. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
 \item i++ : grâce au premier point de cette liste qui a placé correctement un élément supplémentaire, cette incrémentation respecte INV 1.
 \end{enumerate}
-\item Soit index != depart (cas "normal")
+\item Soit index != depart (cas "normal")\\
 \begin{enumerate}
 \item Nous plaçons le contenu de memoire (élément à déplacer) dans cadran[index] (indice où l'on doit placer l'élément) et l'ancien contenu de cadran[index] (nouvel élément à déplacer) dans memoire. Cela a pour effet de respecter INV 1 en plaçant correctement un élément supplémentaire et de respecter INV 3 en plaçant dans memoire l'élément suivant à déplacer.
 \item index = index + rotation : cela respecte bien INV 4. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
 \item INV 2 est respecté car nous ne modifions pas départ.
-\item i++ ne contredit pas INV 1, de par le fait du premier point de cette liste qui a placé correctement un élément supplémentaire.
+\item i++ ne contredit pas INV 1, de par le fait du premier point de cette liste qui a placé correctement un élément supplémentaire.\\
 \end{enumerate}
 \end{enumerate}
 
-\textbf{\{INV && H\} CLOT \{Post\}}
+\textbf{\{INV \&\& H\} CLOT \{Post\}}
 
 
 CLOT est vide, car nous avons modifié le tableau tout au long des itérations.
 La seule partie de l'invariant utile ici est INV 1 qui nous dit que 0 $\le$ i $\le$ |BP| $\le$ |E|. De plus, H nous dit que i = |E|. Nécessairement, donc, |BP| = |E|, ce qui signifie qu'il y a autant d'éléments dans BP que dans E. Autrement dit, tous les éléments de E sont bien placés.
-Nous respectons donc bien Post.
+Nous respectons donc bien \textbf{Post}.
 
 \section{Preuve du variant}
 
