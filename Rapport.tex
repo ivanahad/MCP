@@ -36,13 +36,13 @@ L'algorithme doit répondre à certaines contraintes qui sont:
 \item il doit avoir une complexité algorithmique temporelle en $O(n)$ où $n$ représente la taille du cadran. \newline
 \end{itemize}
 
-Ce présent rapport a donc pour but de vous présenter notre solution au problème, de vous prouvez que notre algorithme est \textbf{correct} et qu'il répond aux \textbf{contraintes} citées plus haut. Pour ce faire, la méthode utilisée est celle vue en cours qu'on peut découper en plusieurs parties:
+Ce présent rapport a donc pour but de vous présenter notre solution au problème, de vous prouver que notre algorithme est \textbf{correct} et qu'il répond aux \textbf{contraintes} citées plus haut. Pour ce faire, la méthode utilisée est celle vue en cours qu'on peut découper en plusieurs parties:
 %Expliquer différentes parties ?
 \begin{itemize}
 \item Théorie du problème
-\item Convention de représentation
+\item Conventions de représentation
 \item Spécifications des méthodes
-\item Code Java
+\item Implémentation en Java
 \item Correction totale de l'algorithme: triplet de Hoare-Manna et variant \newline
 \end{itemize}
 
@@ -60,9 +60,13 @@ i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux enti
 \end{figure}
 
 La deuxième théorie est la suivante:\newline
+<<<<<<< HEAD
 Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. Par exemple, sur la Fig.1, un parcours par pas de 3 en commençant par l'élément 0 donnera la suite: <15, 12, 54,15>.\newline
+=======
+Soit $p$, le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. \newline
+>>>>>>> origin/master
 
-Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tout les éléments du cadran une fois sauf les éléments de départ qui seront visités au début et à la fin d'un parcours.\newline
+Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tous les éléments du cadran une fois, sauf les éléments de départ qui seront visités au début et à la fin d'un parcours.\newline
 
 La démonstration de cette propriété se fera en 2 parties:
 \begin{itemize}
@@ -70,7 +74,7 @@ La démonstration de cette propriété se fera en 2 parties:
 \item Montrer que les parcours avec point de départ $a_{i}$,...,$a_{i+(p-1)}$ ne possèdent \textbf{aucun élément en commun}.\newline
 \end{itemize}
 
-Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et pour pas $n$, il faut avoir effectuer $k$ nombre de pas de n avant de retomber sur $a_{i}$. \newline
+Soit $k = y/p$. Pour un parcours $P$ quelconque ayant comme point de départ $a_{i}$ et ayant pour pas $n$, il faut avoir effectué $k$ nombre de pas de n avant de retomber sur $a_{i}$. \newline
 
 En effet, si nous visitons les éléments par pas de $n$, il faut que la somme des pas soit égale à un multiple de $y$ pour retomber sur un même élément (on peut démontrer cela gràce aux modulos, pour que 2 nombres modulo n soit égaux il faut que leur différence soit un multiple de n). Or $n*k$ est bien un multiple de y puisque $k = y/p$ et que $p$ divise $n$. On peut résumer cela par la formule:\newline
 $(n*k+i)$ mod $y = i$ \newline
@@ -92,9 +96,13 @@ $q(t_{1} - t_{2}) = \frac{j-i}{p}$  (où $n=q*p$).\newline
 
 On a que $(j-i) < p$. De plus comme $i < j$, on peut supposer que $t_{1} > t_{2}$. Comme $(t_{1}-t_{2}) \geq 1$ et que $(\frac{j-i}{p}) < 1$ alors on peut conclure que cette égalité n'a aucune solution et que donc il n'y a pas d'éléments en commun pour les parcours cités plus haut.\newline
 
-On vient de démontrer que la propriété énoncée est vraie. Comme chaque parcours contient $k = y/p$ éléments différents et qu'on effectue $p$ parcours de cette sorte en changeant d'indice de départ, on a bien qu'on visite $k*p = (y*p)/p = y $ éléments différents. Donc on aura visité tout les éléments du cadran. \newline
+On vient de démontrer que la propriété énoncée est vraie. Comme chaque parcours contient $k = y/p$ éléments différents et qu'on effectue $p$ parcours de cette sorte en changeant d'indice de départ, on a bien qu'on visite $k*p = (y*p)/p = y $ éléments différents. Donc on aura visité tous les éléments du cadran. \newline
 
+<<<<<<< HEAD
 A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tout les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent. Par exemple, si on considère le parcours par pas de 6  en commençant de l'élément 0 sur la Fig.1, on obtient la suite:< 15, 54, 12, 15>. Il suffit alors en effectuant le parcours de modifier 54 par 15, 12 par 54, etc.
+=======
+A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tous les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent.
+>>>>>>> origin/master
 %Ajouter schéma pour illustrer cela
 
 \section{Convention de représentation}
@@ -104,6 +112,7 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
    \caption{Source : cours de MCP, 2015}
 \end{figure}
 
+\newpage
 \section{Spécifications des méthodes}
 
 entête: public static void rotation(int[] cadran, int rotation)\\
@@ -335,5 +344,5 @@ Ainsi : \\
 
 
 \section{Conclusion}
-Ce rapport montrait donc une correction totale de notre algorithme permettant de d'effectuer une rotation sur un cadran. Ainsi, nous avons prouvé qu'il est correct tout en respectant les contraintes de complexité temporelle. De plus, il ne croît pas en espace. Nous pensons que notre algorithme est plus général possible.
+Ce rapport montre donc une correction totale de notre algorithme permettant de d'effectuer une rotation sur un cadran. Ainsi, nous avons prouvé qu'il est correct tout en respectant les contraintes de complexité temporelle. De plus, il ne croît pas en espace, et nous pensons que notre algorithme est le plus général possible.
 \end{document}
