@@ -53,7 +53,11 @@ Soit $C$ un cadran de longueur $y$ (disposant de y éléments). Nous voulons eff
 La théorie des modulos nous permet de dire, si on compte les éléments du cadran à partir de l'indice 0, de dire que l'élément 0 est le même que le yème élément pour le cadran C. L'élément 1 est égal au (y+1)éme élément du cadran C, etc. On peut le traduire sous cette écriture:\newline
 i mod y = y+i mod y ou de façon plus générale \newline
 i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux entiers naturels). \newline
-%Introduire schéma pour montrer cela
+
+\begin{figure}[c|h]
+	\includegraphics[scale=0.3]{cadran.jpg}
+	\caption{Cadran de taille 9}
+\end{figure}
 
 La deuxième théorie est la suivante:\newline
 Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. \newline
