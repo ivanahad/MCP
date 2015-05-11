@@ -111,19 +111,11 @@ La convention de représentation est donnée par la fig.2. Le cadran est représ
 
 \section{Spécifications}
 
-<<<<<<< HEAD
 \begin{description}
 \item[entête]: public static void rotation(int[] cadran, int rotation)
 \item[pré]: cadran != null  $\dot{\wedge}$ rotation $\in$ [0, $2^{31}$[
 \item[post]: le tableau "\textit{cadran}" est transformé en y opérant une rotation de longueur "\textit{rotation}". Une rotation de longueur $n$ sur un tableau consiste à déplacé chaque élément à l'indice j ($j \in$ [0, cadran.length[ ) du tableau vers l'indice $(j+n)$ mod $n$ du tableau.
 \end{description}
-=======
-\textbf{Entête}: public static void rotation(int[] cadran, int rotation)\\
-
-\textbf{Pré}: cadran != null $\wedge$ rotation $\in$ [0, $2^{31}$[\\
-
-\textbf{Post}: le cadran final est obtenu par une rotation de longueur "\textit{rotation}" du cadran initial. Une rotation de longueur $i$ est obtenue en déplaçant chaque élément en position $j$ ($j \in$ [0, cadran.length[ ) du cadran vers la position $(j+i)\%cadran.length$ .
->>>>>>> origin/master
 
 \newpage
 \section{Code Java}
