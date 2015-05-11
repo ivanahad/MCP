@@ -25,7 +25,7 @@ language=Java,
 \maketitle
 \section{Introduction}
 
-Dans le cadre du cours Méthode de Conception de Programmes, il nous a été demandé de construire un algorithme \textit{correct} qui prend en entrée un \textbf{cadran $C_{1}$} et un \textbf{entier naturel $n$} et qui génère le cadran résultant de la rotation de longueur $n$ de $C_{1}$ . \newline
+Dans le cadre du cours Méthode de Conception de Programmes, il nous a été demandé de construire un algorithme \textit{correct} qui prend en entrée un \textbf{cadran $C_{1}$} et un \textbf{entier naturel $n$}, générant le cadran résultant de la rotation de longueur $n$ de $C_{1}$ . \newline
 
 L'algorithme doit répondre à certaines contraintes qui sont:
 \begin{itemize}
@@ -36,7 +36,7 @@ L'algorithme doit répondre à certaines contraintes qui sont:
 \item il doit avoir une complexité algorithmique temporelle en $O(n)$ où $n$ représente la taille du cadran. \newline
 \end{itemize}
 
-Ce présent rapport a donc pour but de vous présenter notre solution au problème et de vous prouvez que notre algorithme est \textbf{correct} et qu'il répond aux \textbf{contraintes} citées plus haut. Pour ce faire, la méthode utilisée est celle vue en cours qu'on peut découper en plusieurs parties:
+Ce présent rapport a donc pour but de vous présenter notre solution au problème, de vous prouvez que notre algorithme est \textbf{correct} et qu'il répond aux \textbf{contraintes} citées plus haut. Pour ce faire, la méthode utilisée est celle vue en cours qu'on peut découper en plusieurs parties:
 %Expliquer différentes parties ?
 \begin{itemize}
 \item Théorie du problème
@@ -165,7 +165,7 @@ Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le 
 \end{figure}
 
 
-\item INV 2 : La variable "depart" contient l'indice auquel nous avons démarré le tour courant du cadran, et 0 $\le$ depart $\le$ cadran.length
+\item INV 2 : La variable "depart" contient l'indice auquel nous avons démarré le parcours courant du cadran, et 0 $\le$ depart $\le$ cadran.length
 
 \item INV 3 : La variable "memoire" contient l'élément que nous devons déplacer.
 
@@ -197,25 +197,25 @@ H : i = |E|
 \begin{itemize}
 \item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ]\} t.q. (0$\le$ $r_{0}$)\\
 
-rotation=rotation\%cadran.length\\
+rotation:=rotation\%cadran.length\\
 
-\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ]\} t.q. (0$\le$ $r_{1}$ $\le$ cadran.length)\\ 
+\item \{rotation=rotation\%cadran.length=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ]\} t.q. (0$\le$ $r_{1}$ $\le$ cadran.length)\\ 
 
 depart:=0\\
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 
 memoire:=cadran[depart]\\
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ \} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ \} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 
 index:=rotation
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{0}$\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{0}$\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 
 i:=0\\
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{0}$ $\wedge$ i=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{0}$ $\wedge$ i=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 \end{itemize}
 
 \textbf{\{Pre\} INIT \{INV\}}
@@ -224,7 +224,7 @@ i:=0\\
 
 \item rotation = rotation\%cadran.length => Par la théorie du modulo, ne modifie pas le problème.
 
-\item depart = 0 => Respecte bien INV 2 à l'initialisation : nous démarrons le premier tour à l'indice 0.
+\item depart = 0 => Respecte bien INV 2 à l'initialisation : nous démarrons le premier parcours à l'indice 0.
 
 \item memoire = cadran[depart] => Respecte bien INV 3 : le premier élément à déplacer est celui à l'indice 0.
 
@@ -265,17 +265,18 @@ else\\
 
 \end{itemize}
 
-\textbf{\{INV \&\& !H\} ITER \{INV\}}
+\textbf{\{INV $\dot{\wedge}$ !H\} ITER \{INV\}}
 Deux cas possibles :\\
 \begin{enumerate}
-\item Soit index == depart (cela signifie que nous avons réalisé un tour mais que, par !H, le travail n'est pas fini ; cela arrivera pgcd(rotation, |cadran|) fois, cfr. théorie du problème)
+\item Soit index == depart (cela signifie que nous avons réalisé un parcours mais que, par !H, le travail n'est pas fini ; cela arrivera pgcd(rotation, |cadran|) fois, cfr. théorie du problème)
 \begin{enumerate}
 
-\item cadran[index] = memoire : cette opération réalise le dernier changement de ce tour. Cela permet de respecter INV 1 en plaçant correctement un élément de plus.
-\item depart = depart + 1 : sachant, que (par INV 2), depart contenait l'indice de depart du tour qui est en cours, nous décalons l'indice de départ de 1, ce qui nous permet de commencer un nouveau tour à cet indice. Cela respecte donc INV 2. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
-\item memoire = cadran[depart] : memoire retient le nouvel élément que nous devons déplacer, à savoir l'élément à l'indice de départ du nouveau tour. INV 3 est donc également respecté.
-\item index = depart + rotation : nous respectons bien INV 4 en ce sens que l'indice auquel nous devons placer memoire est bien l'indice de départ du tour augmenté du nombre de rotations à effectuer. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
+\item cadran[index] = memoire : cette opération réalise le dernier changement de ce parcours. Cela permet de respecter INV 1 en plaçant correctement un élément de plus.
+\item depart = depart + 1 : sachant, que (par INV 2), depart contenait l'indice de depart du parcours qui est en cours, nous décalons l'indice de départ de 1, ce qui nous permet de commencer un nouveau parcours à cet indice. Cela respecte donc INV 2. (Rem. : nous devons réaliser l'opération \%|cadran| sur ce nombre pour ne pas sortir du tableau)
+\item memoire = cadran[depart] : memoire retient le nouvel élément que nous devons déplacer, à savoir l'élément à l'indice de départ du nouveau parcours. INV 3 est donc également respecté.
+\item index = depart + rotation : nous respectons bien INV 4 en ce sens que l'indice auquel nous devons placer memoire est bien l'indice de départ du parcours augmenté du nombre de rotations à effectuer. (Rem. : nous devons réaliser l'opération \%|cadran| sur ce nombre pour ne pas sortir du tableau)
 \item i++ : grâce au premier point de cette liste qui a placé correctement un élément supplémentaire, cette incrémentation respecte INV 1.
+\item La taille du tableau n'a pas été modifiée, respectant INV 5
 \end{enumerate}
 \item Soit index != depart (cas "normal")\\
 \begin{enumerate}
@@ -283,10 +284,15 @@ Deux cas possibles :\\
 \item index = index + rotation : cela respecte bien INV 4. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
 \item INV 2 est respecté car nous ne modifions pas départ.
 \item i++ ne contredit pas INV 1, de par le fait du premier point de cette liste qui a placé correctement un élément supplémentaire.\\
+\item La taille du tableau n'a pas été modifiée, respectant INV 5
 \end{enumerate}
 \end{enumerate}
 
-\textbf{\{INV \&\& H\} CLOT \{Post\}}
+\textbf{\{INV $\dot{\wedge}$ H\} CLOT \{Post\}}\\
+
+\{rotation=$r_{1}$ $\wedge$ cadran=[$e'_{0}$,..., $e'_{cadran.length-1}$ ] $\wedge$ depart=$d_{final}$ $\wedge$ memoire=$m_{final}$ $\wedge$ index=$index_{final}$ $\wedge$ \textbf{i=cadran.length}\}\\
+
+
 
 
 CLOT est vide, car nous avons modifié le tableau tout au long des itérations.
@@ -310,15 +316,17 @@ Ainsi, notre variant est \textbf{y-i}.
 \subsection{Prouver que le variant est supérieur ou égal à 0}
 Par la première partie de l'invariant, nous savons que 0 $\le$i $\le$ |BP| $\le$ |E|, où y=|E|. Nous allons transformer l'expression \textbf{i $\le$ y} pour montrer que y-i est effectivement supérieur ou égal à 0 : \\
 
-\textit{INV => i $\le$ y => -y $\le$ -i => y-y $\le$ y-i => 0 $\le$ y-i}. \\
+\textit{INV => i $\le$ y => -y $\le$ -i => y - y $\le$ y - i => 0 $\le$ y - i}. \\
 
 Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la fin de la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
 
 \subsection{Prouver que le variant à la ième itération est supérieur qu'à la ième+1 itération}
+Dans le if (Partie1) et le else(Partie2) de notre algorithme, le i est à chaque fois incrémenté après avoir effectué les instructions. A chaque itération, i est donc incrémenté. Dès lors, on peut voir que \textbf{y-i} décroit à chaque itération.
+Ainsi : \\
 
+\textit{INV => y - $i_{1}$ > y - $i_{2}$ où $i_{2}$ = ($i_{1}$ + 1)}
 
 
 \section{Conclusion}
-
-
+Ce rapport montrait donc une correction totale de notre algorithme permettant de d'effectuer une rotation sur un cadran. Ainsi, nous avons prouvé qu'il est correct tout en respectant les contraintes de complexité temporelle. De plus, il ne croît pas en espace. Nous pensons que notre algorithme est plus général possible.
 \end{document}
