@@ -97,6 +97,7 @@ On vient de démontrer que la propriété énoncée est vraie. Comme chaque parc
 A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tous les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent.
 %Ajouter schéma pour illustrer cela
 
+\newpage
 \section{Convention de représentation}
 
 \begin{figure}[h]
@@ -104,14 +105,14 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
    \caption{Source : cours de MCP, 2015}
 \end{figure}
 
-\newpage
-\section{Spécifications des méthodes}
 
-entête: public static void rotation(int[] cadran, int rotation)\\
+\section{Spécifications}
 
-pré: cadran != null $\wedge$ rotation $\in$ [0, $2^{31}$[\\
+\textbf{Entête}: public static void rotation(int[] cadran, int rotation)\\
 
-post: le cadran final est obtenu par une rotation de longueur "\textit{rotation}" du cadran initial. Une rotation de longueur $i$ est obtenu en déplaçant chaque élément en position $j$ ($j \in$ [0, cadran.length[ ) du cadran vers la position $(j+i)\%cadran.length$ .
+\textbf{Pré}: cadran != null $\wedge$ rotation $\in$ [0, $2^{31}$[\\
+
+\textbf{Post}: le cadran final est obtenu par une rotation de longueur "\textit{rotation}" du cadran initial. Une rotation de longueur $i$ est obtenue en déplaçant chaque élément en position $j$ ($j \in$ [0, cadran.length[ ) du cadran vers la position $(j+i)\%cadran.length$ .
 
 \newpage
 \section{Code Java}
