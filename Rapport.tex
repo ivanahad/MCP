@@ -312,7 +312,6 @@ Nous respectons donc bien \textbf{Post}.
 
 \newpage
 \section{Preuve du variant}
-Notre invariant est \textbf{y-i}
 Nous allons utiliser l'invariant pour prouver le variant. Il s'agit de prouver deux propriétés pour montrer que celui-ci décroît effectivement : 
 \begin{enumerate}
 
@@ -323,13 +322,13 @@ Nous allons utiliser l'invariant pour prouver le variant. Il s'agit de prouver d
 
 Pour cette preuve, nous allons poser que \textbf{y} est égal à la longueur du cadran(donc \textbf{|E|}), et \textbf{i} représente le nombre d'éléments correctement placés dans le cadran.\\
 
-Ainsi, notre variant est \textbf{y-i}.
+Ainsi, notre variant est \textbf{y - i}.
 \subsection{Prouver que le variant est supérieur ou égal à 0}
 Par la première partie de l'invariant, nous savons que 0 $\le$i $\le$ |BP| $\le$ |E|, où y=|E|. Nous allons transformer l'expression \textbf{i $\le$ y} pour montrer que y-i est effectivement supérieur ou égal à 0 : \\
 
 \textit{INV => i $\le$ y => -y $\le$ -i => y - y $\le$ y - i => 0 $\le$ y - i}. \\
 
-Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la fin de la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
+Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la fin de la ième itération, il est aisé de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
 
 \subsection{Prouver que le variant à la ième itération est supérieur qu'à la ième+1 itération}
 Dans le if (Partie1) et le else(Partie2) de notre algorithme, le i est à chaque fois incrémenté après avoir effectué les instructions. A chaque itération, i est donc incrémenté. Dès lors, on peut voir que \textbf{y-i} décroit à chaque itération.
