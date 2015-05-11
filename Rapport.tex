@@ -125,37 +125,37 @@ La convention de représentation est donnée par la fig.2. Le cadran est représ
 \begin{lstlisting}[frame=single]
 
 public static void rotation(int[] cadran, int rotation){
-        rotation = rotation%cadran.length;
+    rotation = rotation%cadran.length;
         
-        int depart = 0; // L'indice duquel on part (utile si l'on doit a un moment se decaler)
-        int memoire = cadran[depart]; // Memorise le nombre a deplacer
-        int index = rotation; // L'indice auquel on va mettre memoire
+    int depart = 0; // L'indice duquel on part (utile si l'on doit a un moment se decaler)
+    int memoire = cadran[depart]; // Memorise le nombre a deplacer
+    int index = rotation; // L'indice auquel on va mettre memoire
         
-        int i = 0;
-        while (i != cadran.length){
-            
-            if (index == depart){ // On revient au point de depart => il va falloir se decaler
+    int i = 0;
+    while (i != cadran.length){
+           
+       if (index == depart){ // On revient au point de depart => il va falloir se decaler
                 
-                cadran[index] = memoire; // On fait le dernier changement
+            cadran[index] = memoire; // On fait le dernier changement
 
-                depart = (depart+1)%cadran.length; // On decale l'indice de depart de une place
-                memoire = cadran[depart]; // On memorise ce qui se trouve a l'indice de depart
-                index = (depart + rotation)%cadran.length; // L'indice de l'element auquel on doit mettre memoire
+            depart = (depart+1)%cadran.length; // On decale l'indice de depart de une place
+            memoire = cadran[depart]; // On memorise ce qui se trouve a l'indice de depart
+            index = (depart + rotation)%cadran.length; // L'indice de l'element auquel on doit mettre memoire
                 
-                i++;
-            }
-            else{
+        	i++;
+       }
+       else{
                 
-                // On met dans cadran[index] ce qui se trouvait en memeoire et on met en memoire ce qui se trouvait a cadran[index]
-                int tmp = cadran[index];
-                cadran[index] = memoire;
-                memoire = tmp;
+            // On met dans cadran[index] ce qui se trouvait en memeoire et on met en memoire ce qui se trouvait a cadran[index]
+            int tmp = cadran[index];
+            cadran[index] = memoire;
+            memoire = tmp;
                 
-                index = (index + rotation)%cadran.length; // On deplace index du nombre de rotations
-                i++;
-            }
-        }
-	}
+            index = (index + rotation)%cadran.length; // On deplace index du nombre de rotations
+            i++;
+       }
+   }
+}
 
 \end{lstlisting} 
 
