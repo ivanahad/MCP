@@ -153,14 +153,16 @@ Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le 
 \end{figure}
 
 
-\item INV 2 : La variable "depart" contient l'indice auquel nous avons démarré le tour courant du cadran.
+\item INV 2 : La variable "depart" contient l'indice auquel nous avons démarré le tour courant du cadran, et 0 $\le$ depart $\le$ cadran.length
 
 \item INV 3 : La variable "memoire" contient l'élément que nous devons déplacer.
 
-\item INV 4 : La variable "index" contient l'indice auquel nous devons déplacer l'élément contenu dans "mémoire".
+\item INV 4 : La variable "index" contient l'indice auquel nous devons déplacer l'élément contenu dans "mémoire", et 0 $\le$ index $\le$ cadran.length
+
+\item INV 5 : la taille du cadran n'est pas modifiée.
 \end{enumerate}
 
-Ainsi, l'invariant est la conjonction : $INV 1 \wedge INV 2 \wedge INV 3 \wedge INV 4$
+Ainsi, l'invariant est la conjonction : $INV 1 \wedge INV 2 \wedge INV 3 \wedge INV 4 \wedge INV 5$
 
 
 
@@ -193,15 +195,15 @@ depart:=0\\
 
 memoire:=cadran[depart]\\
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ $e_{0}$ \} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ \} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 
 index:=rotation
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ $e_{0}$ $\wedge$ index=$r_{0}$\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{0}$\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 
 i:=0\\
 
-\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ $e_{0}$ $\wedge$ index=$r_{0}$ $\wedge$ i=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
+\item \{rotation=$r_{0}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=0 $\wedge$ memoire=$e_{0}$ $\wedge$ index=$r_{0}$ $\wedge$ i=0\} t.q. (0$\le$ $r_{0}$ $\le$ cadran.length)\\
 \end{itemize}
 
 \textbf{\{Pre\} INIT \{INV\}}
@@ -217,6 +219,8 @@ i:=0\\
 \item  index = rotation => Respecte bien INV 4 : nous voulons placer le contenu de "memoire" (càd l'élément à l'indice 0) à l'indice "rotation" du tableau.
         
 \item int i = 0 => Respecte bien INV 1 : il y a 0 élément correctement placé.
+
+\item La taille du tableau n'a pas été modifiée, INV 5 est donc respecté
 \end{enumerate}
 
 Nous retrouvons donc bien l'invariant à la fin de l'initialisation (en partant des préconditions). \\
@@ -224,8 +228,32 @@ Nous retrouvons donc bien l'invariant à la fin de l'initialisation (en partant 
 
 \textbf{Ex. symbolique de ITER lorsque {INV $\dot{\wedge}$ $\neg$ H}}\\
 
-\textbf{\{INV \&\& !H\} ITER \{INV\}}
+\begin{itemize}
 
+
+\item \{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{cadran.length-1}$ ] $\wedge$ depart=$d_{1}$ $\wedge$ memoire=$m_{1}$ $\wedge$ index=$index_{1}$ $\wedge$ i=$i_{1}$\} t.q. ((0$\le$ $r_{1}$ $\le$ cadran.length $\wedge$ $cadran_{0}$.length=$cadran_{1}$.length  $\wedge$ 0 $\le$ $i_{1}$ $\le$ cadran.length $\wedge$ \textbf{A COMPLETER})= \textbf{Cond1} )\\
+
+if(index == depart) 
+ \{ENV\} t.q. (\textbf{Cond1} $\dot{\wedge}$ $index_{1}$=$d_{1}$)\\
+ Partie1\\
+else\\
+ \{ENV\} t.q. (\textbf{Cond1} $\dot{\wedge}$ $\neg$ $index_{1}$=$d_{1}$)\\
+ Partie2\\
+ 
+\item après exécution de Partie 1 : 
+
+\{rotation=$r_{1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{index1-1}$, $m_{1}$, $e_{index1+1}$, ...,  $e_{cadran.length-1}$ ] $\wedge$ depart=$d_{2}$ $\wedge$ memoire=$e_{d2}$ $\wedge$ index=$index_{2}$ $\wedge$ i=$i_{1}$+1 \} t.q. ((\textbf{Cond1} $\dot{\wedge}$ $index_{1}$=$d_{1}$))\\
+\\
+\\
+\item après exécution de Partie 2 : 
+\{rotation=$r_{1}$ $\wedge$  tmp=$e_{index1}$ $\wedge$ cadran=[$e_{0}$,..., $e_{index1-1}$, $m_{1}$, $e_{index1+1}$, ...,  $e_{cadran.length-1}$ ] $\wedge$ depart=$d_{2}$ $\wedge$ memoire=$e_{index1}$ $\wedge$ index=$index_{2}$ $\wedge$ i=$i_{1}$+1 \} t.q. ((\textbf{Cond1} $\dot{\wedge}$ $index_{1}$=$d_{1}$))\\
+
+
+
+
+\end{itemize}
+
+\textbf{\{INV \&\& !H\} ITER \{INV\}}
 Deux cas possibles :\\
 \begin{enumerate}
 \item Soit index == depart (cela signifie que nous avons réalisé un tour mais que, par !H, le travail n'est pas fini ; cela arrivera pgcd(rotation, |cadran|) fois, cfr. théorie du problème)
@@ -274,7 +302,7 @@ Par la première partie de l'invariant, nous savons que 0 $\le$i $\le$ |BP| $\le
 
 Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
 
-\subsection{Prouver que le variant à ième itération est supérieur qu'à la ième+1 itération}
+\subsection{Prouver que le variant à la ième itération est supérieur qu'à la ième+1 itération}
 
 
 
