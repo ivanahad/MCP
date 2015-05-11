@@ -51,7 +51,7 @@ Ce présent rapport a donc pour but de vous présenter notre solution au problè
 
 Soit $C$ un cadran de longueur $y$ (disposant de y éléments). Nous voulons effectuer une rotation de  longueur $n$ sur ce cadran. Une première propriété utile à la résolution de ce problème est la théorie des \textbf{modulos}. \newline
 
-La théorie des modulos nous permet de dire, si on compte les éléments du cadran à partir de l'indice 0, de dire que l'élément 0 est le même que le yème élément pour le cadran C. L'élément 1 est égal au (y+1)éme élément du cadran C, etc (voir Fig.1). On peut le traduire sous cette écriture:\newline
+La théorie des modulos nous permet de dire, si on compte les éléments du cadran à partir de l'indice 0, de dire que l'élément 0 est le même que le yème élément pour le cadran C. L'élément 1 est égal au (y+1)éme élément du cadran C, etc. On peut le traduire sous cette écriture:\newline
 i mod y = y+i mod y ou de façon plus générale \newline
 i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux entiers naturels). \newline
 
@@ -61,8 +61,7 @@ i mod y = (k*y)+i mod y (où i est compris entre [0, y[ et k appartient aux enti
 \end{figure}
 
 La deuxième théorie est la suivante:\newline
-Soit $p$ le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. Par exemple, sur la Fig.1, un parcours par pas de 3 en commençant par l'élément 0 donnera la suite: <15, 12, 54,15>.\newline
-
+Soit $p$, le \textbf{plus grand commun diviseur} de $y$ et $n$. Nommons $a_{0}$, $a_{1}$, ..., $a_{y-1}$ les éléments du cadran. Considérons un \textbf{parcours} du cadran par pas de $n$ en démarrant de l'élément $a_{i}$ ($i \in [0,y[$) comme étant la suite d'éléments $a_{i}$ , $a_{i+n}$,$a_{i+2n}$, ... du cadran jusqu'à retomber sur l'élément de départ $a_{i}$. \newline
 
 Nous pouvons donc énoncer la théorie du problème comme étant que les \textbf{parcours successifs} par pas de $n$ avec point de départ les éléments  $a_{i}$, ..., $a_{i+(p-1)}$ permet de visiter tous les éléments du cadran une fois, sauf les éléments de départ qui seront visités au début et à la fin d'un parcours.\newline
 
@@ -96,8 +95,8 @@ On a que $(j-i) < p$. De plus comme $i < j$, on peut supposer que $t_{1} > t_{2}
 
 On vient de démontrer que la propriété énoncée est vraie. Comme chaque parcours contient $k = y/p$ éléments différents et qu'on effectue $p$ parcours de cette sorte en changeant d'indice de départ, on a bien qu'on visite $k*p = (y*p)/p = y $ éléments différents. Donc on aura visité tous les éléments du cadran. \newline
 
-A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tout les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent. Par exemple, si on considère le parcours par pas de 6  en commençant de l'élément 0 sur la Fig.1, on obtient la suite:< 15, 54, 12, 15>. Il suffit alors en effectuant le parcours de modifier 54 par 15, 12 par 54, etc.
-
+A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on peut décaler tous les éléments du cadran après y sauts (où un saut est un pas de n). En effet, cela revient, pour un parcours, à remplacer chaque élément dans le parcours par son précédent.
+%Ajouter schéma pour illustrer cela
 
 \newpage
 \section{Convention de représentation}
@@ -111,11 +110,11 @@ La convention de représentation est donnée par la fig.2. Le cadran est représ
 
 \section{Spécifications}
 
-\begin{description}
-\item[entête]: public static void rotation(int[] cadran, int rotation)
-\item[pré]: cadran != null  $\dot{\wedge}$ rotation $\in$ [0, $2^{31}$[
-\item[post]: le tableau "\textit{cadran}" est transformé en y opérant une rotation de longueur "\textit{rotation}". Une rotation de longueur $n$ sur un tableau consiste à déplacé chaque élément à l'indice j ($j \in$ [0, cadran.length[ ) du tableau vers l'indice $(j+n)$ mod $n$ du tableau.
-\end{description}
+\textbf{Entête}: public static void rotation(int[] cadran, int rotation)\\
+
+\textbf{Pré}: cadran != null $\wedge$ rotation $\in$ [0, $2^{31}$[\\
+
+\textbf{Post}: le cadran final est obtenu par une rotation de longueur "\textit{rotation}" du cadran initial. Une rotation de longueur $i$ est obtenue en déplaçant chaque élément en position $j$ ($j \in$ [0, cadran.length[ ) du cadran vers la position $(j+i)\%cadran.length$ .
 
 \newpage
 \section{Code Java}
@@ -180,7 +179,7 @@ Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le 
 
 \item INV 4 : La variable "index" contient l'indice auquel nous devons déplacer l'élément contenu dans "mémoire", et 0 $\le$ index < cadran.length
 
-\item INV 5 : la taille du cadran n'est pas modifiée.
+\item INV 5 : la taille du tableau n'est pas modifiée.
 \end{enumerate}
 
 Ainsi, l'invariant est la conjonction : $INV 1 \wedge INV 2 \wedge INV 3 \wedge INV 4 \wedge INV 5$
