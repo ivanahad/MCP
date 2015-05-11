@@ -95,7 +95,13 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
 
 \section{Convention de représentation}
 
+\begin{figure}[h]
+   \includegraphics[scale=0.5]{Conventions.png}
+   \caption{Source : cours de MCP, 2015}
+\end{figure}
+
 \section{Spécifications des méthodes}
+
 \newpage
 \section{Code Java}
 
@@ -300,13 +306,13 @@ Par la première partie de l'invariant, nous savons que 0 $\le$i $\le$ |BP| $\le
 
 \textit{INV => i $\le$ y => -y $\le$ -i => y-y $\le$ y-i => 0 $\le$ y-i}. \\
 
-Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
+Il est assez simple de déterminer que le variant est supérieur ou égal à 0. En effet, dans les conventions de représentation, il n'existe pas de tableau de taille négative, ainsi, y sera au minimum égal à 0. De plus, comme décrit dans l'invariant, comme i représente le nombre d'éléments correctement placés à la fin de la ième itération, il est simple de déterminer que i est au minimum égal à 0. Ainsi, la différence entre y et i ne peut être négative. 
 
 \subsection{Prouver que le variant à la ième itération est supérieur qu'à la ième+1 itération}
 
 
 
-
+\section{Conclusion}
 
 
 \end{document}
