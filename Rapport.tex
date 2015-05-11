@@ -6,6 +6,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{listings}  
+\usepackage{graphicx}
+
 
 \author{David \bsc{Haven} \and Eddy \bsc{Ndizera} \and Ivan \bsc{Ahad} \and Julien \bsc{Sterbelle}}
 
@@ -90,7 +92,7 @@ A cela s'ajoute une autre propriété qui découle de la dernière qui est qu'on
 \section{Convention de représentation}
 
 \section{Spécifications des méthodes}
-
+\newpage
 \section{Code Java}
 
 \lstset{language=Java}
@@ -131,6 +133,88 @@ public static int parcours(int[] cadran,
 }
 
 \end{lstlisting} 
+
+\section{Correction totale de l'algorithme}
+\subsection{Invariant, condition d'arrêt, Triplet de Hoare-Manna}
+\subsubsection*{Invariant}
+
+\vspace{0.2cm}
+
+\begin{enumerate}
+\item INV 1 : Il y a (au moins) i éléments correctement placés dans le cadran et il y a au maximum |cadran| éléments bien placés dans le cadran.
+Graphiquement, si l'ensemble des éléments du cadran est l'ensemble E et BP le sous ensemble des éléments bien placés de E, alors 0 $\le$i $\le$ |BP| $\le$ |E|. (Rem. : |A| = la taille de l'ensemble A).\\
+
+\begin{figure}[h]
+   \includegraphics[scale=0.4]{Ensembles}
+\end{figure}
+
+
+\item INV 2 : La variable "depart" contient l'indice auquel nous avons démarré le tour courant du cadran.
+
+\item INV 3 : La variable "memoire" contient l'élément que nous devons déplacer.
+
+\item INV 4 : La variable "index" contient l'indice auquel nous devons déplacer l'élément contenu dans "mémoire".
+\end{enumerate}
+
+
+
+\subsubsection*{Condition d'arrêt}
+
+H : i = |E|
+
+\subsubsection{Triplet de Hoare-Manna}
+\vspace{0.2cm}
+
+\{Pre\} INIT \{INV\}
+\vspace{0.2cm}
+
+\textbf{Pre} :
+\begin{enumerate}
+ \item rotation = le nombre de rotation que l'on souhaite faire. 
+ \item cadran un tableau non vide représentant l'état du cadran.
+\end{enumerate}
+
+\vspace{0.2cm}
+
+\textbf{INIT} :
+
+\begin{enumerate}
+
+\item rotation = rotation\%cadran.length => Par la théorie du modulo, ne modifie pas le problème.
+
+\item depart = 0 => Respecte bien INV 2 à l'initialisation : nous démarrons le premier tour à l'indice 0.
+
+\item memoire = cadran[depart] => Respecte bien INV 3 : le premier élément à déplacer est celui à l'indice 0.
+
+\item  index = rotation => Respecte bien INV 4 : nous voulons placer le contenu de "memoire" (càd l'élément à l'indice 0) à l'indice "rotation" du tableau.
+        
+\item int i = 0 => Respecte bien INV 1 : il y a 0 élément correctement placé.
+\end{enumerate}
+\vspace{0.3cm}
+
+Nous retrouvons donc bien l'invarient à la fin de l'initialisation (en partant des préconditions). \\
+
+\{INV && !H\} ITER \{INV\}
+
+Deux cas possibles :
+•	Soit index == depart (cela signifie que nous avons réalisé un tour mais que, par !H, le travail n'est pas fini ; cela arrivera pgcd(rotation, |cadran|) fois, cfr. théorie du problème)
+o	cadran[index] = memoire : cette opération réalise le dernier changement de ce tour. Cela permet de respecter INV 1 en plaçant correctement un élément de plus.
+o	depart = depart + 1 : sachant, que (par INV 2), depart contenait l'indice de depart du tour qui est en cours, nous décalons l'indice de départ de 1, ce qui nous permet de commencer un nouveau tour à cet indice. Cela respecte donc INV 2. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
+o	memoire = cadran[depart] : memoire retient le nouvel élément que nous devons déplacer, à savoir l'élément à l'indice de départ du nouveau tour. INV 3 est donc également respecté.
+o	index = depart + rotation : nous respectons bien INV 4 en ce sens que l'indice auquel nous devons placer memoire est bien l'indice de départ du tour augmenté du nombre de rotations à effectuer. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
+o	i++ : grâce au premier point de cette liste qui a placé correctement un élément supplémentaire, cette incrémentation respecte INV 1.
+•	Soit index != depart (cas "normal")
+o	Nous plaçons le contenu de memoire (élément à déplacer) dans cadran[index] (indice où l'on doit placer l'élément) et l'ancien contenu de cadran[index] (nouvel élément à déplacer) dans memoire. Cela a pour effet de respecter INV 1 en plaçant correctement un élément supplémentaire et de respecter INV 3 en plaçant dans memoire l'élément suivant à déplacer.
+o	index = index + rotation : cela respecte bien INV 4. (Rem. : nous devons réaliser l'opération %|cadran| sur ce nombre pour ne pas sortir du tableau)
+o	INV 2 est respecté car nous ne modifions pas départ.
+o	i++ ne contredit pas INV 1, de par le fait du premier point de cette liste qui a placé correctement un élément supplémentaire.
+
+
+\{INV && H\} CLOT \{Post\}
+
+CLOT est vide, car nous avons modifié le tableau tout au long des itérations.
+La seule partie de l'invariant utile ici est INV 1 qui nous dit que i ≤ |BP| ≤ |E|. De plus, H nous dit que i = |E|. Nécessairement, donc, |BP| = |E|, ce qui signifie qu'il y a autant d'éléments dans BP que dans E. Autrement dit, tous les éléments de E sont bien placés.
+Nous respectons donc bien Post.
 
 
 
